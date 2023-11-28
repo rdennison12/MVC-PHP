@@ -1,23 +1,26 @@
 <?php
 
+namespace App\Controllers;
+
+use App\Models\Product;
+
 /**
  * Created by Rick Dennison
  * Date:      11/26/23
  *
- * File Name: products.php
+ * File Name: Products.php
  * Project:   MVC-PHP-2023
  */
 class Products
 {
-    public function index()
+    public function index(): void
     {
-        require "src/models/product.php";
-        $model = new product();
+        $model = new Product;
         $products = $model->getData();
         require "views/products_index.php";
     }
 
-    public function show()
+    public function show(): void
     {
         require "views/products_show.php";
     }

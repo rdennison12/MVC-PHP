@@ -3,9 +3,13 @@
  * Created by Rick Dennison
  * Date:      11/25/23
  *
- * File Name: product.php
+ * File Name: Product.php
  * Project:   MVC-PHP-2023
  */
+
+namespace App\Models;
+use PDO;
+
 class Product
 {
     public function getData(): array
