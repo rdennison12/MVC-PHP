@@ -1,6 +1,5 @@
 <?php
 
-namespace App\Controllers;
 /**
  * Created by Rick Dennison
  * Date:      11/26/23
@@ -8,6 +7,7 @@ namespace App\Controllers;
  * File Name: Home.php
  * Project:   MVC-PHP-2023
  */
+namespace App\Controllers;
 class Home
 {
     public function index(): void
