@@ -17,11 +17,11 @@ class Products
     {
         $model = new Product;
         $products = $model->getData();
-        require "views/products_index.php";
+        require "Views/products_index.php";
     }
 
     public function show(): void
     {
-        require "views/products_show.php";
+        require "Views/products_show.php";
     }
 }

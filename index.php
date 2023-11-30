@@ -16,12 +16,14 @@ spl_autoload_register(function (string $class_name)
 
 $router = new Framework\Router;
 
+$router->add("/{controller}/{id:\d+}/{action}");
 $router->add("/home/index", ["controller" => "home", "action" => "index"]);
 $router->add("/products", ["controller" => "products", "action" => "index"]);
 $router->add("/", ["controller" => "home", "action" => "index"]);
+$router->add("/{controller}/{action}");
 
 $params = $router->match($path);
-
+//var_dump($params);
 if ($params === false) {
     exit("No route found");
 }
