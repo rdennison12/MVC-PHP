@@ -8,10 +8,16 @@
  * Project:   MVC-PHP-2023
  */
 namespace App\Controllers;
+use Framework\Viewer;
+
 class Home
 {
     public function index(): void
     {
-        require "Views/home_index.php";
+        $viewer = new Viewer;
+        echo $viewer->render("Shared/header.php", [
+            "title" => "Home"
+        ]);
+        echo $viewer->render("Home/index.php");
     }
 }

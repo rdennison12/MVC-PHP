@@ -8,3 +8,4 @@
 * Created the Dispatcher class
   * Includes methods to get arguments, controller and action names,
   * and checks if there is a namespace in the URL
+* Created the Viewer class
