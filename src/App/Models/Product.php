@@ -6,19 +6,25 @@
  * File Name: Product.php
  * Project:   MVC-PHP-2023
  */
+declare(strict_types=1);
 
 namespace App\Models;
+
 use PDO;
+use App\Database;
 
 class Product
 {
+    public function __construct(private Database $database)
+    {
+    }
+
+    /**
+     * @return array
+     */
     public function getData(): array
     {
-        $dsn = "mysql:host=localhost;dbname=product_db;charset=utf8;port=3306";
-
-        $pdo = new PDO($dsn, "product_db_user", "Bee#08088", [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-        ]);
+        $pdo = $this->database->getConnection();
 
         $stmt = $pdo->query("SELECT * FROM product");
 

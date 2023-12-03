@@ -9,3 +9,5 @@
   * Includes methods to get arguments, controller and action names,
   * and checks if there is a namespace in the URL
 * Created the Viewer class
+* Enabled Dependency Injection (DI) to better handle the code
+* Enabled strict_type to assist with troubleshooting

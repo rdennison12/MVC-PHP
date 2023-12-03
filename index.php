@@ -6,7 +6,10 @@
  * File Name: index.php
  * Project:   MVC-PHP-2023
  */
+declare(strict_types=1);
 
+use App\Database;
+use Framework\Container;
 use Framework\Dispatcher;
 
 $path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
@@ -27,7 +30,12 @@ $router->add("/products", ["controller" => "products", "action" => "index"]);
 $router->add("/", ["controller" => "home", "action" => "index"]);
 $router->add("/{controller}/{action}");
 
+$container = new Container;
+$container->set(App\Database::class, function ()
+{
+    return new Database("localhost", "product_db", "product_db_user", "Bee#08088");
+});
 
 
-$dispatcher = new Dispatcher($router);
+$dispatcher = new Dispatcher($router, $container);
 $dispatcher->handle($path);

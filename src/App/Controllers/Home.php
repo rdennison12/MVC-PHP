@@ -7,17 +7,23 @@
  * File Name: Home.php
  * Project:   MVC-PHP-2023
  */
+declare(strict_types=1);
+
 namespace App\Controllers;
+
 use Framework\Viewer;
 
 class Home
 {
+    public function __construct(private Viewer $viewer)
+    {
+    }
+
     public function index(): void
     {
-        $viewer = new Viewer;
-        echo $viewer->render("Shared/header.php", [
+        echo $this->viewer->render("Shared/header.php", [
             "title" => "Home"
         ]);
-        echo $viewer->render("Home/index.php");
+        echo $this->viewer->render("Home/index.php");
     }
 }

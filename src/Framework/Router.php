@@ -6,6 +6,7 @@
  * File Name: Router.php
  * Project:   MVC-PHP-2023
  */
+declare(strict_types=1);
 
 namespace Framework;
 

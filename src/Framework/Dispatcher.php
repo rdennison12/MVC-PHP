@@ -6,6 +6,7 @@
  * File Name: Dispatcher.php
  * Project:   MVC-PHP-2023
  */
+declare(strict_types=1);
 
 namespace Framework;
 
@@ -16,14 +17,13 @@ class Dispatcher
 {
     /**
      * @param Router $router
+     * @param Container $container
      */
-    public function __construct(private Router $router)
+    public function __construct(private Router $router, private Container $container)
     {
     }
 
     /**
-     * @param string $path
-     * @return void
      * @throws ReflectionException
      */
     public function handle(string $path): void
@@ -36,7 +36,7 @@ class Dispatcher
         $action = $this->getActionName($params);
         $controller = $this->getControllerName($params);
 
-        $controller_object = new $controller;
+        $controller_object = $this->container->get($controller);
         $args = $this->getActionArguments($controller, $action, $params);
         $controller_object->$action(...$args);
     }
@@ -68,10 +68,10 @@ class Dispatcher
         $controller = $params["controller"];
         $controller = str_replace("-", "", ucwords(strtolower($controller), "-"));
         $namespace = "App\Controllers";
-        if (array_key_exists("namespace", $params)){
+        if (array_key_exists("namespace", $params)) {
             $namespace .= "\\" . $params["namespace"];
         }
-        return $namespace. "\\" . $controller;
+        return $namespace . "\\" . $controller;
     }
 
     /**
@@ -83,5 +83,6 @@ class Dispatcher
         $action = $params["action"];
         return lcfirst(str_replace("-", "", ucwords(strtolower($action), "-")));
     }
+
 
 }
