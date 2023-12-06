@@ -12,3 +12,4 @@
 * Enabled Dependency Injection (DI) to better handle the code
 * Enabled strict_type to assist with troubleshooting
 * Begin adding error and exception handling
+* Finished adding error and exception handling
