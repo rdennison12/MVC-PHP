@@ -12,8 +12,17 @@ use App\Database;
 use Framework\Container;
 use Framework\Dispatcher;
 
-$path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
+$show_errors = true;
+if ($show_errors){
+    ini_set("display_errors", "1");
+} else {
+    ini_set("display_errors", "0");
+}
 
+$path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
+if ($path === false) {
+    throw new UnexpectedValueException("Malformed URL: '{$_SERVER["REQUEST_URI"]}'");
+}
 spl_autoload_register(function (string $class_name)
 {
     require "src/" . str_replace("\\", "/", $class_name) . ".php";

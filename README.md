@@ -11,3 +11,4 @@
 * Created the Viewer class
 * Enabled Dependency Injection (DI) to better handle the code
 * Enabled strict_type to assist with troubleshooting
+* Begin adding error and exception handling
