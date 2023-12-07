@@ -16,7 +16,7 @@ class Viewer
     {
         extract($data, EXTR_SKIP);
         ob_start();
-        require "Views/$template";
+        require dirname(__DIR__, 2) . "/Views/$template";
         return ob_get_clean();
     }
 }

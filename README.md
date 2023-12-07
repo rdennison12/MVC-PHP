@@ -13,3 +13,5 @@
 * Enabled strict_type to assist with troubleshooting
 * Begin adding error and exception handling
 * Finished adding error and exception handling
+* Added configuration for $_ENV global to extract hardcoded information
+* Beginning to add security to the framework

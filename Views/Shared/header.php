@@ -12,5 +12,6 @@
 <head>
     <meta charset="UTF-8">
     <title><?= $title ?></title>
+    <link rel="stylesheet" href="/public/example.css">
 </head>
 <body>
