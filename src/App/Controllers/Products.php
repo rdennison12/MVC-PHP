@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use App\Models\Product;
+use Framework\Exceptions\PageNotFoundException;
 use Framework\Viewer;
 
 class Products
@@ -22,7 +23,7 @@ class Products
 
     public function index(): void
     {
-        $products = $this->model->getData();
+        $products = $this->model->findAll();
 
         echo $this->viewer->render("Shared/header.php", [
             "title" => "Products"
@@ -35,11 +36,16 @@ class Products
 
     public function show(string $id): void
     {
+        $product = $this->model->find($id);
+        if ($product === false){
+            throw new PageNotFoundException("Product not found");
+        }
+
         echo $this->viewer->render("Shared/header.php", [
             "title" => "Product"
         ]);
         echo $this->viewer->render("Products/show.php", [
-            "id" => $id
+            "product" => $product
         ]);
     }
 

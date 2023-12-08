@@ -15,3 +15,5 @@
 * Finished adding error and exception handling
 * Added configuration for $_ENV global to extract hardcoded information
 * Beginning to add security to the framework
+* Adding functions to retrieve a single record from the database
+* Created a base Model class to make adding models easier
