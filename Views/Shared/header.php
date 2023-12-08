@@ -12,6 +12,6 @@
 <head>
     <meta charset="UTF-8">
     <title><?= $title ?></title>
-    <link rel="stylesheet" href="/public/example.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
 </head>
 <body>

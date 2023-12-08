@@ -17,3 +17,4 @@
 * Beginning to add security to the framework
 * Adding functions to retrieve a single record from the database
 * Created a base Model class to make adding models easier
+* Begin creating a form for inserting new records into the database

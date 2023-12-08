@@ -37,7 +37,7 @@ class Products
     public function show(string $id): void
     {
         $product = $this->model->find($id);
-        if ($product === false){
+        if ($product === false) {
             throw new PageNotFoundException("Product not found");
         }
 
@@ -52,5 +52,23 @@ class Products
     public function showPage(string $title, string $id, string $page): void
     {
         echo $title, " ", $id, " ", $page;
+    }
+
+    public function new()
+    {
+        echo $this->viewer->render("Shared/header.php", [
+            "title" => "New Product"
+        ]);
+        echo $this->viewer->render("Products/new.php");
+    }
+
+    public function create()
+    {
+        $data = [
+            "name" => $_POST["name"],
+            "description" => $_POST["description"]
+        ];
+
+        var_dump($this->model->insert($data));
     }
 }
