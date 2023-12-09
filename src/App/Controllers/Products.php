@@ -59,16 +59,27 @@ class Products
         echo $this->viewer->render("Shared/header.php", [
             "title" => "New Product"
         ]);
-        echo $this->viewer->render("Products/new.php");
+        echo $this->viewer->render("/Products/new.php");
     }
 
     public function create()
     {
         $data = [
             "name" => $_POST["name"],
-            "description" => $_POST["description"]
+            "description" => empty($_POST["description"]) ? null : $_POST["description"]
         ];
 
-        var_dump($this->model->insert($data));
+        if ($this->model->insert($data)) {
+            header("Location: /products/{$this->model->getInsertID()}/show");
+            exit;
+        }
+        else {
+            echo $this->viewer->render("Shared/header.php", [
+                "title" => "New Product"
+            ]);
+            echo $this->viewer->render("Products/new.php", [
+                "errors" => $this->model->getErrors()
+            ]);
+        }
     }
 }
