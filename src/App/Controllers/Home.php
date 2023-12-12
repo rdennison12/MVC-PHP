@@ -11,14 +11,11 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use Framework\Controller;
 use Framework\Viewer;
 
-class Home
+class Home extends Controller
 {
-    public function __construct(private Viewer $viewer)
-    {
-    }
-
     public function index(): void
     {
         echo $this->viewer->render("Shared/header.php", [
