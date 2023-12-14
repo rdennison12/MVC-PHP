@@ -24,3 +24,4 @@
 * Added functionality to protect data from being deleted from using the URL
 * Encapsulated the Requests and Viewer to dynamically create them
 * Begin building a templating solution
+* Create the base MVC template with methods in the MVCTemplateViewer to getBlocks and replaceYields
