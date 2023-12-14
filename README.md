@@ -25,3 +25,5 @@
 * Encapsulated the Requests and Viewer to dynamically create them
 * Begin building a templating solution
 * Create the base MVC template with methods in the MVCTemplateViewer to getBlocks and replaceYields
+* Completed building the templating engine for this application
+  * Will look into creating error checking for missing blocks and ETC.
