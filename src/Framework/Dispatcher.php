@@ -28,7 +28,7 @@ class Dispatcher
     /**
      * @throws ReflectionException
      */
-    public function handle(Request $request): void
+    public function handle(Request $request): Response
     {
         $path = $this->getPath($request->uri);
         $params = $this->router->match($path, $request->method);
@@ -43,9 +43,10 @@ class Dispatcher
 
         $controller_object->setRequest($request);
         $controller_object->setViewer($this->container->get(TemplateViewerInterface::class));
+        $controller_object->setResponse($this->container->get(Response::class));
 
         $args = $this->getActionArguments($controller, $action, $params);
-        $controller_object->$action(...$args);
+        return $controller_object->$action(...$args);
     }
 
     private function getPath(string $uri): string

@@ -18,15 +18,12 @@ $dotenv->load(ROOT_PATH . "/.env");
 set_error_handler("Framework\\ErrorHandler::handleError");
 set_exception_handler("Framework\\ErrorHandler::handleException");
 
-$path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
-if ($path === false) {
-    throw new UnexpectedValueException("Malformed URL: '{$_SERVER["REQUEST_URI"]}'");
-}
-
 $router = require ROOT_PATH . "/Config/routes.php";
 
 $container = require ROOT_PATH . "/Config/services.php";
 
 $dispatcher = new Framework\Dispatcher($router, $container);
 $request = Framework\Request::createFromGlobals();
-$dispatcher->handle($request);
+$response = $dispatcher->handle($request);
+
+$response->send();
