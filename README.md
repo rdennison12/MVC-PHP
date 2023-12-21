@@ -29,3 +29,5 @@
   * Will look into creating error checking for missing blocks and ETC.
 * Added a Response class for injecting a response in the controller(s)
   * This class injects a response from the controller class
+* Created an Example Middleware - Completed
+  * Will work to incorporate the registration form later

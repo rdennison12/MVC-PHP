@@ -16,15 +16,15 @@ $router->add("/product/{slug:[\w-]+}", ["controller" => "products", "action" => 
 //$router->add("/{controller}/{id:\d+}/{action}");
 
 // Routes specific to database administration
-$router->add("/{controller}/{id:\d+}/show", ["action" => "show"]);
+$router->add("/{controller}/{id:\d+}/show", ["action" => "show", "middleware" => "message|message"]);
 $router->add("/{controller}/{id:\d+}/edit", ["action" => "edit"]);
 $router->add("/{controller}/{id:\d+}/update", ["action" => "update"]);
 $router->add("/{controller}/{id:\d+}/delete", ["action" => "delete"]);
 $router->add("/{controller}/{id:\d+}/destroy", ["action" => "destroy", "method" => "post"]);
 
 
-$router->add("/home/index", ["controller" => "home", "action" => "index"]);
-$router->add("/products", ["controller" => "products", "action" => "index"]);
+$router->add("/home/index", ["controller" => "home", "action" => "index", "middleware" => "message|message"]);
+$router->add("/products", ["controller" => "products", "action" => "index", "middleware" => "message|message"]);
 $router->add("/", ["controller" => "home", "action" => "index"]);
 $router->add("/{controller}/{action}");
 

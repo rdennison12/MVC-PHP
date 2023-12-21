@@ -22,7 +22,9 @@ $router = require ROOT_PATH . "/Config/routes.php";
 
 $container = require ROOT_PATH . "/Config/services.php";
 
-$dispatcher = new Framework\Dispatcher($router, $container);
+$middleware = require ROOT_PATH . "/Config/middleware.php";
+
+$dispatcher = new Framework\Dispatcher($router, $container, $middleware);
 $request = Framework\Request::createFromGlobals();
 $response = $dispatcher->handle($request);
 

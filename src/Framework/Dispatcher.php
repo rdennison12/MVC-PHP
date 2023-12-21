@@ -21,7 +21,7 @@ class Dispatcher
      * @param Router $router
      * @param Container $container
      */
-    public function __construct(private Router $router, private Container $container)
+    public function __construct(private Router $router, private Container $container, private array $middleware_classes)
     {
     }
 
@@ -41,12 +41,38 @@ class Dispatcher
 
         $controller_object = $this->container->get($controller);
 
-        $controller_object->setRequest($request);
         $controller_object->setViewer($this->container->get(TemplateViewerInterface::class));
         $controller_object->setResponse($this->container->get(Response::class));
 
         $args = $this->getActionArguments($controller, $action, $params);
-        return $controller_object->$action(...$args);
+        $controller_handler = new ControllerRequestHandler($controller_object, $action, $args);
+        $middleware = $this->getMiddleware($params);
+
+        $middleware_handler = new MiddlewareRequestHandler($middleware, $controller_handler);
+
+        return $middleware_handler->handle($request);
+    }
+
+    /**
+     * @param array $params
+     * @return array
+     * @throws ReflectionException
+     */
+    private function getMiddleware(array $params): array
+    {
+        if (!array_key_exists("middleware", $params)) {
+            return [];
+        }
+        $middleware = explode("|", $params["middleware"]);
+
+        array_walk($middleware, function (&$value) {
+            if (!array_key_exists($value, $this->middleware_classes)) {
+                throw new UnexpectedValueException("Middleware '$value' not found in config settings");
+            }
+            $value = $this->container->get($this->middleware_classes[$value]);
+        });
+
+        return $middleware;
     }
 
     private function getPath(string $uri): string
@@ -58,6 +84,7 @@ class Dispatcher
         }
         return $path;
     }
+
     /**
      * @param string $controller
      * @param string $action
